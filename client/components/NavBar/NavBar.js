@@ -69,8 +69,8 @@ class NavBar extends Component {
       <Menu>
         <Menu.Item header>
           <Link to='/'>SpotBang</Link>
-          {displayLinks}
         </Menu.Item>
+        {displayLinks}
       </Menu>
     )
   }
