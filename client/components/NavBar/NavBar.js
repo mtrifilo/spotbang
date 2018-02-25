@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { bool, object } from 'prop-types'
+import { Menu } from 'semantic-ui-react'
+
 import GuestLinks from './GuestLinks'
 import AuthenticatedLinks from './AuthenticatedLinks'
-import { bool, object } from 'prop-types'
 
 class NavBar extends Component {
   constructor (props) {
@@ -42,25 +44,34 @@ class NavBar extends Component {
       displayLinks = null
     }
 
+    // return (
+    //   <nav className='navbar navbar-dark bg-dark navbar-expand-sm'>
+    //     <button
+    //       className='navbar-toggler navbar-toggler-right'
+    //       type='button'
+    //       role='button'
+    //       data-toggle='collapse'
+    //       data-target='#navbarNavAltMarkup'
+    //       aria-controls='navbarNavAltMarkup'
+    //       aria-expanded='false'
+    //       aria-label='Toggle navigation'
+    //     >
+    //       <span className='navbar-toggler-icon' />
+    //     </button>
+    //       <Link to='/' className='navbar-brand'>
+    //       SpotBang
+    //       </Link>
+    //     {displayLinks}
+    //   </nav>
+    // )
+
     return (
-      <nav className='navbar navbar-dark bg-dark navbar-expand-sm'>
-        <button
-          className='navbar-toggler navbar-toggler-right'
-          type='button'
-          role='button'
-          data-toggle='collapse'
-          data-target='#navbarNavAltMarkup'
-          aria-controls='navbarNavAltMarkup'
-          aria-expanded='false'
-          aria-label='Toggle navigation'
-        >
-          <span className='navbar-toggler-icon' />
-        </button>
-          <Link to='/' className='navbar-brand'>
-          React SSR Boilerplate
-          </Link>
-        {displayLinks}
-      </nav>
+      <Menu>
+        <Menu.Item header>
+          <Link to='/'>SpotBang</Link>
+          {displayLinks}
+        </Menu.Item>
+      </Menu>
     )
   }
 }
