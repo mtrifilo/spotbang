@@ -1,0 +1,13 @@
+@import 'Login/_Login.css';
+@import 'Common/_FlashMessage.css';
+@import 'NavBar/_NavBar.css';
+@import 'Account/_AccountSettings.css';
+
+body {
+    background-color: #7fdbff;
+}
+
+.page-title {
+    margin-top: 2rem;
+    font-size: 4em;
+}
