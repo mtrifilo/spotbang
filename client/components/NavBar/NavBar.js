@@ -11,9 +11,14 @@ class NavBar extends Component {
   constructor (props) {
     super(props)
     this.state = {
+      displayLinks: false,
       showAuthenticatedLinks: false,
       mounted: false
     }
+  }
+
+  handleItemClick = (e, { name }) => {
+    this.setState({ activeRoute: name })
   }
 
   componentDidMount = () => {
@@ -25,50 +30,32 @@ class NavBar extends Component {
   }
 
   componentWillReceiveProps = nextProps => {
-    if (nextProps.isAuthenticated) {
-      this.setState({ showAuthenticatedLinks: true })
-    } else {
-      this.setState({ showAuthenticatedLinks: false })
-    }
+    this.setState({
+      showAuthenticatedLinks: Boolean(nextProps.isAuthenticated)
+    })
   }
 
   render () {
-    let displayLinks
+    let displayLinks = null
     if (this.state.mounted && this.props.isAuthenticated !== null) {
       displayLinks = this.state.showAuthenticatedLinks ? (
-        <AuthenticatedLinks location={this.props.location} />
+        <AuthenticatedLinks
+          location={this.props.location}
+          handleItemClick={this.handleItemClick}
+        />
       ) : (
-        <GuestLinks />
+        <GuestLinks
+          location={this.props.location}
+          activeRoute={this.state.activeItem}
+          handleItemClick={this.handleItemClick}
+        />
       )
-    } else {
-      displayLinks = null
     }
 
-    // return (
-    //   <nav className='navbar navbar-dark bg-dark navbar-expand-sm'>
-    //     <button
-    //       className='navbar-toggler navbar-toggler-right'
-    //       type='button'
-    //       role='button'
-    //       data-toggle='collapse'
-    //       data-target='#navbarNavAltMarkup'
-    //       aria-controls='navbarNavAltMarkup'
-    //       aria-expanded='false'
-    //       aria-label='Toggle navigation'
-    //     >
-    //       <span className='navbar-toggler-icon' />
-    //     </button>
-    //       <Link to='/' className='navbar-brand'>
-    //       SpotBang
-    //       </Link>
-    //     {displayLinks}
-    //   </nav>
-    // )
-
     return (
-      <Menu>
-        <Menu.Item header>
-          <Link to='/'>SpotBang</Link>
+      <Menu inverted borderless>
+        <Menu.Item as={Link} to='/' position='left'>
+          SpotBang
         </Menu.Item>
         {displayLinks}
       </Menu>

@@ -1,21 +1,29 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { Menu } from 'semantic-ui-react'
+import { func, string } from 'prop-types'
 
 const GuestLinks = props => (
-  <div
-    className='collapse navbar-collapse justify-content-end'
-    id='navbarNavAltMarkup'
-    >
-    <div className='navbar-nav'>
-      <NavLink
+  <div>
+    <div>
+      <Menu.Item
+        as={Link}
         to='/login'
-        className='nav-item nav-link'
-        activeClassName='active'
+        position='right'
+        onClick={props.handleItemClick}
+        active={props.location.pathname === '/login'}
       >
         Login
-      </NavLink>
+      </Menu.Item>
     </div>
   </div>
 )
+
+GuestLinks.propTypes = {
+  handleItemClick: func.isRequired,
+  location: {
+    pathname: string.isRequired
+  }
+}
 
 export default GuestLinks

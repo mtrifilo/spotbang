@@ -1,5 +1,9 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-const Home = props => <h1 className='text-center page-title'>Home!</h1>
+class Home extends Component {
+  render () {
+    return <h1>Spotbang</h1>
+  }
+}
 
 export default Home
