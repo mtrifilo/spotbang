@@ -37,38 +37,38 @@ const template = _template(baseTemplate)
 // App configuration and secrets
 const config = require('./config.json')
 
-const connectMongoose = require('./server/db/connectMongoose')
-const MONGO_URI =
-  process.env.NODE_ENV === 'production'
-    ? config.mongoUriProduction
-    : config.mongoUriDev
+// const connectMongoose = require('./server/db/connectMongoose')
+// const MONGO_URI =
+//   process.env.NODE_ENV === 'production'
+//     ? config.mongoUriProduction
+//     : config.mongoUriDev
 
 const express = require('express')
 const helmet = require('helmet')
 const bodyParser = require('body-parser')
-const passport = require('passport')
-const localStrategy = require('./server/passport/localStrategy')
-const githubStrategy = require('./server/passport/githubStrategy')
+// const passport = require('passport')
+// const localStrategy = require('./server/passport/localStrategy')
+// const githubStrategy = require('./server/passport/githubStrategy')
 const PORT = process.env.PORT || config.expressPort
 const app = express()
 
-const signup = require('./server/routes/signup')
-const login = require('./server/routes/login')
-const user = require('./server/routes/user')
+// const signup = require('./server/routes/signup')
+// const login = require('./server/routes/login')
+// const user = require('./server/routes/user')
 
-connectMongoose(MONGO_URI)
+// connectMongoose(MONGO_URI)
 
 // Middleware
 app.use(helmet())
 app.use(bodyParser.json())
-app.use(passport.initialize())
-passport.use('local-login', localStrategy)
-passport.use('login-github', githubStrategy)
+// app.use(passport.initialize())
+// passport.use('local-login', localStrategy)
+// passport.use('login-github', githubStrategy)
 
 // Routes
-app.use('/api/signup', signup)
-app.use('/api/login', login)
-app.use('/api/user', user)
+// app.use('/api/signup', signup)
+// app.use('/api/login', login)
+// app.use('/api/user', user)
 app.use('/public', express.static('./public'))
 
 /**

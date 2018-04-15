@@ -1,8 +1,17 @@
 import React, { Component } from 'react'
+import { Tab } from 'semantic-ui-react'
+
+const panes = [
+  { menuItem: 'Featured', render: () => <div>Featured</div> },
+  { menuItem: 'Artist', render: () => <div>Artist</div> },
+  { menuItem: 'Media', render: () => <div>Media</div> }
+]
 
 class Home extends Component {
   render () {
-    return <h1>Spotbang</h1>
+    return (
+      <Tab panes={panes} />
+    )
   }
 }
 

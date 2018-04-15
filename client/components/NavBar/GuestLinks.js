@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Menu } from 'semantic-ui-react'
-import { func, string } from 'prop-types'
+import { func, string, shape } from 'prop-types'
 
 const GuestLinks = props => (
   <div>
@@ -21,9 +21,12 @@ const GuestLinks = props => (
 
 GuestLinks.propTypes = {
   handleItemClick: func.isRequired,
-  location: {
-    pathname: string.isRequired
-  }
+  location: shape({
+    hash: string,
+    key: string,
+    pathname: string.isRequired,
+    search: string
+  })
 }
 
 export default GuestLinks
