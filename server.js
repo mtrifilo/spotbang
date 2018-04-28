@@ -88,10 +88,13 @@ app.use((req, res) => {
       )
     )
   )
+  console.log('req.url:', req.url)
+  console.log('context:', context)
   if (context.url) {
     res.redirect(context.url)
   } else {
     res.status(200).send(template({ body }))
+    console.log('body:', body)
   }
 })
 console.log('node environment:', process.env.NODE_ENV)

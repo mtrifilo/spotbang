@@ -1,13 +1,15 @@
 const webpack = require('webpack')
 const path = require('path')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+// const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 module.exports = function () {
   return {
+    mode: 'development',
     context: __dirname,
     entry: {
-      vendor: ['react', 'react-dom', 'react-router-dom'],
+      // vendor: ['react', 'react-dom', 'react-router-dom'],
       app: './client/components/BrowserEntry.js'
     },
     output: {
@@ -37,18 +39,12 @@ module.exports = function () {
           exclude: [/node_modules/]
         },
         {
-          test: /\.json$/,
-          loader: 'json-loader'
-        },
-        {
           test: /\.css$/,
-          use: ExtractTextPlugin.extract({
-            fallback: 'style-loader',
-            use: [
-              { loader: 'css-loader', options: { importLoaders: 1 } },
-              'postcss-loader'
-            ]
-          })
+          use: [
+            MiniCssExtractPlugin.loader,
+            { loader: 'css-loader', options: { importLoaders: 1 } },
+            'postcss-loader'
+          ]
         },
         {
           test: /\.(png|woff|woff2|eot|ttf|svg)$/,
@@ -63,17 +59,19 @@ module.exports = function () {
       maxAssetSize: 300000
     },
     plugins: [
-      new ExtractTextPlugin('/css/style.css'),
+      new MiniCssExtractPlugin({
+        filename: 'client/components/main.css'
+      }),
       new webpack.ProvidePlugin({
         $: 'jquery',
         jQuery: 'jquery',
         Tether: 'tether'
-      }),
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor',
-        filename: 'vendor.js',
-        minChunks: Infinity
-      }) // ,
+      })
+      // new webpack.optimize.CommonsChunkPlugin({
+      //   name: 'vendor',
+      //   filename: 'vendor.js',
+      //   minChunks: Infinity
+      // }) // ,
       // new BundleAnalyzerPlugin()
     ]
   }
